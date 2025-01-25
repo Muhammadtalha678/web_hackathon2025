@@ -19,7 +19,7 @@ export default function AuthForm({
   }>;
   }) {
   const context = useContext(UserContext)
- const {login,user} = context
+ const {login} = context
   const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLFormElement | null>(null);
   const router = useRouter();
