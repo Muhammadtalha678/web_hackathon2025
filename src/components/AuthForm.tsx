@@ -61,7 +61,7 @@ export default function AuthForm({
       console.log(response.data);
       
         login(response.data.token!, response.data.name!, response.data.email!)
-        // router.push('/')
+        router.push('/')
     } catch (error) {
       const err = error as Error;
       toast({
