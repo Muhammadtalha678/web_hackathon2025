@@ -1,35 +1,34 @@
-'use client'
+'use client';
 
 import { User } from "@/interfaces/User";
 import React, { createContext, useEffect, useState } from "react";
 
-
 interface UserContextType {
     user: User;
-    login: (token: string, name: string, email: string) => void;
+    login: (userData: { token: string, email: string, name: string }) => void;
     logout: () => void;
 }
 
 export const UserContext = createContext<UserContextType>({
-    user: { token: null, email: null, name: null },
+    user: { token: "", email: "", name: "" },
     login: () => { },
     logout: () => { },
-})  
+});
 
 export const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User>({
-        token: null,
-        name: null,
-        email: null,
+        token: "",
+        email: "",
+        name: ""
     });
 
     useEffect(() => {
-        const storedToken = localStorage.getItem('userToken')
-        if (storedToken) {
-            setUser(JSON.parse(storedToken))
+        const storedUser = localStorage.getItem('userToken');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
         }
-    }, [])
-    
+    }, []);
+
     // Save user data to localStorage whenever the user state changes
     useEffect(() => {
         if (user.token) {
@@ -40,21 +39,19 @@ export const UserContextProvider = ({ children }: { children: React.ReactNode })
     }, [user]);
 
     // Login function
-    const login = (token: string, name: string, email: string) => {
-        console.log(token);
-        console.log(name);
-        console.log(email);
-        
-        setUser({ token, name, email });
+    const login = (userData: { token: string, email: string, name: string }) => {
+        setUser(userData);
     };
+
     // Logout function
     const logout = () => {
-        setUser({ token: null, name: null, email: null });
+        setUser({ token: "", email: "", name: "" });
         localStorage.removeItem("userToken");
     };
+
     return (
-        <UserContext.Provider value={{user,login,logout}}>
+        <UserContext.Provider value={{ user, login, logout }}>
             {children}
         </UserContext.Provider>
-    )
-}
+    );
+};

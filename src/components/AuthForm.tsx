@@ -15,7 +15,11 @@ export default function AuthForm({
   action?: (formData: FormData) => Promise<{
     error: boolean;
     message: string;
-    data: {token?:string,name?:string,email?:string};
+    data: {
+      generateAccessToken: string;
+      email: string;
+      name: string;
+    };
   }>;
   }) {
   const context = useContext(UserContext)
@@ -56,9 +60,13 @@ export default function AuthForm({
       if (isRegister) {
        router.push(`/verify-email?email=${encodeURIComponent(email)}`)   
       }
-      // console.log(response.data);
-      
-        login(response.data.token!, response.data.name!, response.data.email!)
+      console.log(response.data);
+      const userData = {
+        token: response.data.generateAccessToken,
+        email: response.data.email,
+        name: response.data.name,
+      };
+        login(userData)
         router.push('/')
     } catch (error) {
       const err = error as Error;
