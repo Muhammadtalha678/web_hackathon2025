@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function AuthForm({
   isRegister,
@@ -95,6 +96,25 @@ export default function AuthForm({
           ? "Register"
           : "Login"}
       </Button>
+      {isRegister ? (
+        <p className="text-center text-sm text-muted-foreground">
+          Already have an account?{" "}
+          <Link href="/login">
+            <span className="text-primary underline">Login</span>
+          </Link>
+        </p>
+          ) :
+        (
+        <p className="text-center text-sm text-muted-foreground">
+          Not registered Yet?{" "}
+          <Link href="/register">
+            <span className="text-primary underline">Register</span>
+          </Link>
+        </p>
+          )   
+              
+          
+      }
     </form>
   );
 }
