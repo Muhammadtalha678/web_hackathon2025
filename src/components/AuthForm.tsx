@@ -1,12 +1,12 @@
 "use client";
 
-import React, { FormEvent, useRef, useState } from "react";
+import React, { FormEvent, useContext, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
+import {UserContext} from '@/context/AuthContext'
 export default function AuthForm({
   isRegister,
   action,
@@ -15,9 +15,11 @@ export default function AuthForm({
   action?: (formData: FormData) => Promise<{
     error: boolean;
     message: string;
-    data: object;
+    data: {token?:string,name?:string,email?:string};
   }>;
-}) {
+  }) {
+  const context = useContext(UserContext)
+ const {login,user} = context
   const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLFormElement | null>(null);
   const router = useRouter();
@@ -51,7 +53,15 @@ export default function AuthForm({
       }
 
       // Redirect to the verify-email page with email as a query parameter
-      {isRegister ? router.push(`/verify-email?email=${encodeURIComponent(email)}`) : router.push('/')}
+      {
+        isRegister
+          &&
+          router.push(`/verify-email?email=${encodeURIComponent(email)}`)  
+      }
+      console.log(response.data);
+      
+        login(response.data.token!, response.data.name!, response.data.email!)
+        // router.push('/')
     } catch (error) {
       const err = error as Error;
       toast({

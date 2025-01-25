@@ -1,5 +1,6 @@
 import { Toaster } from '@/components/ui/toaster';
 import '../globals.css'
+import { UserContextProvider } from '@/context/AuthContext';
 export default function AuthLayout(
     {
   children,
@@ -11,8 +12,11 @@ export default function AuthLayout(
       <body
         
           >
-              <Toaster/>
+        <UserContextProvider>
+
+          <Toaster/>
         {children}
+        </UserContextProvider>
         
       </body>
     </html>
