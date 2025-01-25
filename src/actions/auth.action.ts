@@ -58,6 +58,28 @@ export const verifyEmailAction = async (email: string, otp: string) => {
 }
 
 
-export const LoginAction = async () => {
-    return { error: "data.error", message: "data.message", data: "data.data" }
+export const LoginAction = async (formData: FormData) => {
+    const email = formData.get('email')?.toString()
+    const password = formData.get('password')?.toString()
+    try {
+        const response = await fetch(ApiRoutes.login, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password })
+        })
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || "Login failed");
+        }
+        const data = await response.json()
+        console.log(data);
+
+        return { error: data.error, message: data.message, data: data.data }
+    } catch (error) {
+        const err = error as Error
+        return { error: true, message: err.message, data: null }
+
+    }
 } 

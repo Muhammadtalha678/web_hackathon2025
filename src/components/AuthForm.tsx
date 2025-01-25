@@ -51,7 +51,7 @@ export default function AuthForm({
       }
 
       // Redirect to the verify-email page with email as a query parameter
-      router.push(`/verify-email?email=${encodeURIComponent(email)}`);
+      {isRegister ? router.push(`/verify-email?email=${encodeURIComponent(email)}`) : router.push('/')}
     } catch (error) {
       const err = error as Error;
       toast({
@@ -71,21 +71,21 @@ export default function AuthForm({
       onSubmit={handleSubmit}
     >
       {isRegister && (
-        <Input name="name" placeholder="Full Name" className="w-full" required />
+        <Input name="name" placeholder="Full Name" className="w-full"  />
       )}
       <Input
         name="email"
         type="email"
         placeholder="Email"
         className="w-full"
-        required
+        
       />
       <Input
         name="password"
         type="password"
         placeholder="Password"
         className="w-full"
-        required
+        
       />
       <Button className="w-full" type="submit" disabled={loading}>
         {loading

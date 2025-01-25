@@ -1,4 +1,4 @@
-// import { LoginAction } from '@/actions/auth.action'
+import { LoginAction } from '@/actions/auth.action'
 import AuthForm from '@/components/AuthForm'
 import React from 'react'
 
@@ -8,7 +8,7 @@ const Login = () => {
         
         <div className="w-96 shadow-xl p-6 bg-white rounded-xl">
           <h1 className="text-2xl font-bold text-center mb-4">Login</h1>
-          <AuthForm isRegister={false}  />
+          <AuthForm isRegister={false}  action={LoginAction}/>
         </div>
       </div>
     )
