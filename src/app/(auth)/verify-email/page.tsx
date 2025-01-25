@@ -74,9 +74,10 @@ export default function OtpPage() {
       }
     } 
     catch (error) {
+        const err = error as Error
       toast({
         title: "Error",
-        description: "Something went wrong while verifying OTP.",
+        description: err.message,
         variant: "destructive",
       });
     } finally {
@@ -105,9 +106,10 @@ const handleResendOtp = async () => {
         });
       }
     } catch (error) {
+        const err = error as Error
       toast({
         title: "Error",
-        description: "Something went wrong while resending OTP.",
+        description: err.message,
         variant: "destructive",
       });
     } finally {
