@@ -38,8 +38,8 @@ export default function AuthForm({
       setLoading(true);
 
       const response = await action!(formData);
-      console.log(response);
-
+      
+      console.log(response.message);
       if (response?.error) {
         throw new Error(response.message);
       }
