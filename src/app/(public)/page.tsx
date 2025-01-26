@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { 
   Users, 
@@ -6,7 +7,9 @@ import {
   QrCode 
 } from 'lucide-react';
 
+import {useRouter} from 'next/navigation'
 export default function BeneficiaryManagementLandingPage() {
+  const router = useRouter()
   const userRoles = [
     {
       icon: Users,
@@ -42,7 +45,7 @@ export default function BeneficiaryManagementLandingPage() {
           <nav className="flex items-center space-x-4">
             <a href="#" className="text-gray-600 hover:text-gray-900">User Roles</a>
             <a href="#" className="text-gray-600 hover:text-gray-900">How It Works</a>
-            <button className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full">
+            <button onClick={() => router.push('/login')} className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-full">
               Login
             </button>
           </nav>
