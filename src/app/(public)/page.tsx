@@ -2,8 +2,6 @@ import React from 'react'
 import { 
   Users, 
   UserPlus, 
-  Database, 
-  FileText, 
   Search, 
   QrCode 
 } from 'lucide-react';
