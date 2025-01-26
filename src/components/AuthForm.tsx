@@ -58,7 +58,7 @@ export default function AuthForm({
 
       // Redirect to the verify-email page with email as a query paramete
       if (isRegister) {
-       router.push(`/verify-email?email=${encodeURIComponent(email)}`)   
+       return router.push(`/verify-email?email=${encodeURIComponent(email)}`)   
       }
       console.log(response.data);
       const userData = {
