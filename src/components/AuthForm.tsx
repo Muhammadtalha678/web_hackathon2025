@@ -56,7 +56,7 @@ export default function AuthForm({
         formRef.current.reset();
       }
 
-      // Redirect to the verify-email page with email as a query parameter
+      // Redirect to the verify-email page with email as a query paramete
       if (isRegister) {
        router.push(`/verify-email?email=${encodeURIComponent(email)}`)   
       }
